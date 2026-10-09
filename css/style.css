@@ -1834,3 +1834,235 @@ footer {
         font-size: 2.2rem;
     }
 }
+
+/* ==========================================
+   RESPONSIVO (MOBILE) - AUREVIA
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    /* --- CONTAINER --- */
+    .container {
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    /* --- TOP BAR --- */
+    .top-bar-center {
+        display: none;
+    }
+    .top-bar-content {
+        justify-content: space-between;
+    }
+
+    /* --- HEADER --- */
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0 10px 0;
+    }
+    .header-left, .header-right {
+        justify-content: center;
+        gap: 20px;
+    }
+    .logo h1 {
+        font-size: 1.8rem;
+        letter-spacing: 5px;
+    }
+    .header-left a, .header-right a {
+        font-size: 0.7rem;
+    }
+
+    /* --- MENU DE NAVEGAÇÃO --- */
+    .main-nav {
+        padding: 10px 0;
+    }
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 10px;
+    }
+    .main-nav a {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+
+    /* --- BANNER PRINCIPAL (HOME) --- */
+    .hero {
+        height: auto;
+        min-height: 350px;
+        padding: 50px 15px;
+    }
+    .hero-text h2 {
+        font-size: 2.2rem;
+    }
+    .hero-text p {
+        font-size: 0.95rem;
+    }
+    .btn-hero {
+        padding: 12px 25px;
+        font-size: 0.75rem;
+    }
+
+    /* --- CATÁLOGO: GRID DE PRODUTOS --- */
+    .grid-produtos {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+    .produto-card {
+        width: 100%;
+        max-width: 100%;
+    }
+    .produto-card img {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: contain;
+    }
+    .produto-card h3 {
+        font-size: 1.1rem;
+    }
+    .preco {
+        font-size: 0.9rem;
+    }
+
+    /* --- FILTROS DO CATÁLOGO --- */
+    .catalog-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .filter-group {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filter-group select {
+        width: 100%;
+    }
+
+    /* --- PÁGINA DE PRODUTO --- */
+    .product-detail {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .product-image, .product-info {
+        max-width: 100%;
+        width: 100%;
+    }
+    .product-image img {
+        width: 100%;
+        height: auto;
+        max-height: 350px;
+        object-fit: contain;
+    }
+    .product-info h1 {
+        font-size: 1.6rem;
+    }
+    .product-price {
+        font-size: 1.3rem;
+    }
+    .product-options {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn-add-to-cart, .btn-wishlist {
+        font-size: 0.8rem;
+        padding: 14px;
+    }
+
+    /* --- CARRINHO --- */
+    .cart-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .cart-item-image {
+        width: 120px;
+        height: 120px;
+    }
+    .cart-item-controls {
+        justify-content: center;
+    }
+    .cart-summary {
+        position: static;
+        width: 100%;
+        padding: 25px 20px;
+    }
+
+    /* --- CHECKOUT --- */
+    .checkout-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .checkout-summary {
+        position: static;
+        width: 100%;
+        padding: 25px 20px;
+    }
+    .checkout-item {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* --- LOGIN / CADASTRO --- */
+    .login-box, .register-box {
+        padding: 30px 20px;
+        max-width: 100%;
+    }
+    .login-box h2, .register-box h2 {
+        font-size: 1.5rem;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .auth-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* --- PÁGINA DE OBRIGADO --- */
+    .thank-you-box {
+        padding: 30px 20px;
+    }
+    .thank-you-box h1 {
+        font-size: 1.6rem;
+    }
+    .order-summary {
+        padding: 20px 15px;
+    }
+    .order-summary p {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    /* --- SOBRE --- */
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .about-header h1 {
+        font-size: 2rem;
+    }
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* --- FOOTER --- */
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .redes-sociais {
+        justify-content: center;
+        gap: 20px;
+    }
+}
