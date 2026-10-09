@@ -844,3 +844,57 @@ function initPayPalCheckout(cart, subtotal, customerData, userEmail) {
         }
     }).render('#paypal-checkout-container');
 }
+
+// ==========================================
+// 12. PRODUTOS ALEATÓRIOS NA HOME (3 por vez)
+// ==========================================
+document.addEventListener('DOMContentLoaded', async function() {
+    // Só roda se existir o grid da home
+    const homeGrid = document.getElementById('produtos-destaque');
+    
+    // Se não estiver na home, sai
+    if (!homeGrid) return;
+
+    // Se estiver na página de produto, sai
+    if (document.getElementById('product-detail')) return;
+
+    try {
+        const { data: todosProdutos, error } = await supabaseClient
+            .from('products')
+            .select('*');
+
+        if (error) throw error;
+        if (!todosProdutos || todosProdutos.length === 0) return;
+
+        // Embaralhar (Fisher-Yates)
+        const embaralhados = [...todosProdutos];
+        for (let i = embaralhados.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [embaralhados[i], embaralhados[j]] = [embaralhados[j], embaralhados[i]];
+        }
+
+        // Pegar 3 aleatórios
+        const selecionados = embaralhados.slice(0, 3);
+
+        // Renderizar
+        homeGrid.innerHTML = '';
+        selecionados.forEach(product => {
+            const displayPrice = product.sale_price || product.price;
+            const card = document.createElement('div');
+            card.className = 'produto-card';
+            card.innerHTML = `
+                <div class="produto-imagem">
+                    <img src="${product.image_url}" alt="${product.name}"
+                         onerror="this.src='img/placeholder.jpg'">
+                </div>
+                <h3>${product.name}</h3>
+                <p class="preco">$ ${parseFloat(displayPrice).toFixed(2)}</p>
+                <a href="produto.html?id=${product.id}" class="btn-produto">VIEW DETAILS</a>
+            `;
+            homeGrid.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar produtos aleatórios:', error);
+    }
+});

@@ -71,35 +71,12 @@
         </div>
     </section>
 
-    <!-- FEATURED PRODUCTS -->
+    <!-- FEATURED PRODUCTS (3 ALEATÓRIOS DO BANCO) -->
     <section class="destaques">
         <div class="container">
             <h2 class="titulo-secao">Featured Collection</h2>
-            <div class="grid-produtos">
-                <div class="produto-card">
-                    <div class="produto-imagem">
-                        <img src="img/anel-solitario.jpg" alt="Eternity Solitaire Ring">
-                    </div>
-                    <h3>Eternity Solitaire Ring</h3>
-                    <p class="preco">$ 4,900.00</p>
-                    <a href="produto.html" class="btn-produto">VIEW DETAILS</a>
-                </div>
-                <div class="produto-card">
-                    <div class="produto-imagem">
-                        <img src="img/colar-perola.jpg" alt="Classic Pearl Necklace">
-                    </div>
-                    <h3>Classic Pearl Necklace</h3>
-                    <p class="preco">$ 2,750.00</p>
-                    <a href="produto.html" class="btn-produto">VIEW DETAILS</a>
-                </div>
-                <div class="produto-card">
-                    <div class="produto-imagem">
-                        <img src="img/brinco-diamante.jpg" alt="Lumière Diamond Earrings">
-                    </div>
-                    <h3>Lumière Diamond Earrings</h3>
-                    <p class="preco">$ 6,300.00</p>
-                    <a href="produto.html" class="btn-produto">VIEW DETAILS</a>
-                </div>
+            <div class="grid-produtos" id="produtos-destaque">
+                <p class="loading-message">Loading products...</p>
             </div>
         </div>
     </section>
@@ -128,9 +105,11 @@
         </div>
     </footer>
 
-    <button onclick="testarLogout()" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; padding: 10px 20px; background: #c5a059; color: #fff; border: none; cursor: pointer;">
-    TESTAR LOGOUT
-    </button>
+    <!-- Biblioteca do Supabase (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Arquivo de configuração do Supabase (contém supabaseClient) -->
+    <script src="js/supabase-config.js"></script>
+    <!-- Script principal do site -->
     <script src="js/main.js"></script>
 </body>
 </html>
