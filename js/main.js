@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==========================================
-// 3. CATÁLOGO DE PRODUTOS (Supabase)
+// 3. CATÁLOGO DE PRODUTOS (com filtro pela URL)
 // ==========================================
 document.addEventListener('DOMContentLoaded', async function() {
     const productGrid = document.getElementById('product-grid');
@@ -105,6 +105,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     const sortFilter = document.getElementById('filter-sort');
 
     if (productGrid) {
+
+        // ⭐ ESSAS DUAS LINHAS SÃO A CHAVE DE TUDO
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoriaInicial = urlParams.get('category') || 'all';
+
         async function loadProducts(category = 'all', sortBy = 'featured') {
             try {
                 let query = supabaseClient.from('products').select('*');
@@ -130,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 productGrid.innerHTML = '';
 
                 if (!products || products.length === 0) {
-                    productGrid.innerHTML = '<p class="no-products">No products found.</p>';
+                    productGrid.innerHTML = '<p class="no-products">No products found in this category.</p>';
                     return;
                 }
 
@@ -140,7 +145,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                     card.className = 'produto-card';
                     card.innerHTML = `
                         <div class="produto-imagem">
-                            <img src="${product.image_url}" alt="${product.name}">
+                            <img src="${product.image_url}" alt="${product.name}"
+                                 onerror="this.src='img/placeholder.jpg'">
                         </div>
                         <h3>${product.name}</h3>
                         <p class="preco">$ ${parseFloat(displayPrice).toFixed(2)}</p>
@@ -155,7 +161,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
 
-        loadProducts();
+        // ⭐ Carrega com a categoria vinda da URL
+        loadProducts(categoriaInicial);
+
+        // Sincroniza o select com a URL (se veio ?category=Watches, o select mostra Watches)
+        if (categoryFilter && categoriaInicial !== 'all') {
+            categoryFilter.value = categoriaInicial;
+        }
 
         if (categoryFilter) {
             categoryFilter.addEventListener('change', function() {
