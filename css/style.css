@@ -1836,233 +1836,221 @@ footer {
 }
 
 /* ==========================================
-   RESPONSIVO (MOBILE) - AUREVIA
+   RESPONSIVO (MOBILE) - FORÇADO
    ========================================== */
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
-    /* --- CONTAINER --- */
+    /* Reset geral */
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    body {
+        overflow-x: hidden !important;
+    }
+
     .container {
-        padding: 0 15px;
-        max-width: 100%;
+        padding: 0 12px !important;
+        width: 100% !important;
     }
 
-    /* --- TOP BAR --- */
-    .top-bar-center {
-        display: none;
-    }
-    .top-bar-content {
-        justify-content: space-between;
-    }
-
-    /* --- HEADER --- */
+    /* Header */
     .header-content {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px 0 10px 0;
-    }
-    .header-left, .header-right {
-        justify-content: center;
-        gap: 20px;
+        flex-direction: column !important;
+        padding: 10px 0 !important;
+        gap: 8px !important;
     }
     .logo h1 {
-        font-size: 1.8rem;
-        letter-spacing: 5px;
+        font-size: 1.6rem !important;
+        letter-spacing: 4px !important;
     }
-    .header-left a, .header-right a {
-        font-size: 0.7rem;
+    .top-bar-center {
+        display: none !important;
     }
 
-    /* --- MENU DE NAVEGAÇÃO --- */
-    .main-nav {
-        padding: 10px 0;
-    }
+    /* Menu */
     .main-nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-        padding: 0 10px;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
     }
     .main-nav a {
-        font-size: 0.7rem;
-        letter-spacing: 1px;
+        font-size: 0.65rem !important;
+        padding: 4px 6px !important;
     }
 
-    /* --- BANNER PRINCIPAL (HOME) --- */
+    /* Grid de produtos - UMA COLUNA */
+    .grid-produtos {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* Card de produto */
+    .produto-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* Imagem do produto - CONTROLE TOTAL */
+    .produto-card img,
+    .produto-imagem img,
+    .product-image img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: 250px !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* Página de produto */
+    .product-detail {
+        flex-direction: column !important;
+    }
+    .product-image,
+    .product-info {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Carrinho */
+    .cart-container,
+    .checkout-container,
+    .auth-container {
+        flex-direction: column !important;
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+
+    /* Evitar sobreposição */
+    .produto-imagem,
+    .cart-item-image,
+    .checkout-item-image {
+        overflow: hidden !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+/* ==========================================
+   AJUSTES FINOS MOBILE - AUREVIA
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* --- TOP BAR: empilhar verticalmente --- */
+    .top-bar-content {
+        flex-direction: column !important;
+        gap: 8px !important;
+        text-align: center !important;
+        padding: 8px 10px !important;
+    }
+    .top-bar-left,
+    .top-bar-center,
+    .top-bar-right {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    .top-bar-center p {
+        font-size: 0.7rem !important;
+        line-height: 1.4 !important;
+    }
+    .top-bar-left a,
+    .top-bar-right a {
+        font-size: 0.7rem !important;
+    }
+
+    /* --- HEADER: logo centralizado, ícones em linha --- */
+    .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 15px 10px !important;
+    }
+    .logo {
+        order: -1 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+    .logo h1 {
+        font-size: 1.5rem !important;
+        letter-spacing: 4px !important;
+        white-space: nowrap !important;
+    }
+    .header-left,
+    .header-right {
+        width: 100% !important;
+        justify-content: center !important;
+        gap: 20px !important;
+        flex: none !important;
+    }
+    .header-left a,
+    .header-right a {
+        font-size: 0.7rem !important;
+    }
+
+    /* --- MENU: mostrar todos os links --- */
+    .main-nav {
+        padding: 10px 0 !important;
+    }
+    .main-nav ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px 15px !important;
+        padding: 0 10px !important;
+    }
+    .main-nav li {
+        flex: none !important;
+    }
+    .main-nav a {
+        font-size: 0.65rem !important;
+        letter-spacing: 0.5px !important;
+        padding: 4px 0 !important;
+    }
+
+    /* --- BANNER: reduzir altura --- */
     .hero {
-        height: auto;
-        min-height: 350px;
-        padding: 50px 15px;
+        min-height: 300px !important;
+        padding: 40px 15px !important;
     }
     .hero-text h2 {
-        font-size: 2.2rem;
+        font-size: 2rem !important;
     }
     .hero-text p {
-        font-size: 0.95rem;
-    }
-    .btn-hero {
-        padding: 12px 25px;
-        font-size: 0.75rem;
+        font-size: 0.9rem !important;
     }
 
-    /* --- CATÁLOGO: GRID DE PRODUTOS --- */
+    /* --- GRID: uma coluna --- */
     .grid-produtos {
         grid-template-columns: 1fr !important;
-        gap: 20px;
+        gap: 20px !important;
     }
-    .produto-card {
-        width: 100%;
-        max-width: 100%;
+
+    /* --- EVITAR SOBREPOSIÇÃO DE IMAGENS --- */
+    .produto-imagem {
+        max-height: 280px !important;
+        overflow: hidden !important;
     }
     .produto-card img {
-        width: 100%;
-        height: auto;
-        max-height: 300px;
-        object-fit: contain;
-    }
-    .produto-card h3 {
-        font-size: 1.1rem;
-    }
-    .preco {
-        font-size: 0.9rem;
+        max-height: 280px !important;
+        object-fit: contain !important;
     }
 
-    /* --- FILTROS DO CATÁLOGO --- */
-    .catalog-filters {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .filter-group {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .filter-group select {
-        width: 100%;
-    }
-
-    /* --- PÁGINA DE PRODUTO --- */
-    .product-detail {
-        flex-direction: column;
-        gap: 25px;
-    }
-    .product-image, .product-info {
-        max-width: 100%;
-        width: 100%;
-    }
-    .product-image img {
-        width: 100%;
-        height: auto;
-        max-height: 350px;
-        object-fit: contain;
-    }
-    .product-info h1 {
-        font-size: 1.6rem;
-    }
-    .product-price {
-        font-size: 1.3rem;
-    }
-    .product-options {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .btn-add-to-cart, .btn-wishlist {
-        font-size: 0.8rem;
-        padding: 14px;
-    }
-
-    /* --- CARRINHO --- */
-    .cart-container {
-        flex-direction: column;
-        gap: 25px;
-    }
-    .cart-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    .cart-item-image {
-        width: 120px;
-        height: 120px;
-    }
-    .cart-item-controls {
-        justify-content: center;
-    }
-    .cart-summary {
-        position: static;
-        width: 100%;
-        padding: 25px 20px;
-    }
-
-    /* --- CHECKOUT --- */
-    .checkout-container {
-        flex-direction: column;
-        gap: 25px;
-    }
-    .checkout-summary {
-        position: static;
-        width: 100%;
-        padding: 25px 20px;
-    }
-    .checkout-item {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    /* --- LOGIN / CADASTRO --- */
-    .login-box, .register-box {
-        padding: 30px 20px;
-        max-width: 100%;
-    }
-    .login-box h2, .register-box h2 {
-        font-size: 1.5rem;
-    }
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-    .auth-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    /* --- PÁGINA DE OBRIGADO --- */
-    .thank-you-box {
-        padding: 30px 20px;
-    }
-    .thank-you-box h1 {
-        font-size: 1.6rem;
-    }
-    .order-summary {
-        padding: 20px 15px;
-    }
-    .order-summary p {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    /* --- SOBRE --- */
-    .about-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .about-header h1 {
-        font-size: 2rem;
-    }
-    .values-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    /* --- FOOTER --- */
-    .footer-content {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    .redes-sociais {
-        justify-content: center;
-        gap: 20px;
+    /* --- ESCONDER ELEMENTOS DESNECESSÁRIOS --- */
+    .top-bar-center p {
+        max-width: 100% !important;
     }
 }
