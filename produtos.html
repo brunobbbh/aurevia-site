@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUREVIA | Jewelry Collection</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <a href="#"><i class="fas fa-universal-access"></i> ACCESSIBILITY</a>
+            </div>
+            <div class="top-bar-center">
+                <p>Complimentary shipping on orders over $500* <a href="#">SEE DETAILS</a></p>
+            </div>
+            <div class="top-bar-right">
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Find a Store</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="login.html"><i class="far fa-user"></i> ACCOUNT</a>
+            </div>
+            <div class="logo">
+                <h1><a href="index.html">AUREVIA</a></h1>
+            </div>
+            <div class="header-right">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="far fa-heart"></i></a>
+                <a href="carrinho.html" class="carrinho-icon"><i class="fas fa-shopping-bag"></i> <span class="badge" id="cart-badge">0</span></a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="produtos.html" class="active">Jewelry</a></li>
+                    <li><a href="#">Wedding</a></li>
+                    <li><a href="#">Watches</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Gifts</a></li>
+                    <li><a href="sobre.html">About</a></li>
+                    <li><a href="#" class="sale-link">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CATALOG SECTION -->
+    <main class="catalog-page">
+        <div class="container">
+            <div class="catalog-header">
+                <h2>Jewelry Collection</h2>
+                <p>Discover our exclusive pieces, crafted to last forever.</p>
+            </div>
+
+            <!-- Filtros -->
+            <div class="catalog-filters">
+                <div class="filter-group">
+                    <label for="filter-category">Category</label>
+                    <select id="filter-category">
+                        <option value="all">All</option>
+                        <option value="Watches">Watches</option>
+                        <option value="Charms">Charms</option>
+                        <option value="Bracelets">Bracelets</option>
+                        <option value="Necklaces">Necklaces</option>
+                        <option value="Earrings">Earrings</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filter-sort">Sort By</label>
+                    <select id="filter-sort">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grade de Produtos (preenchida via JavaScript) -->
+            <div class="grid-produtos" id="product-grid">
+                <p class="loading-message">Loading products...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h3>AUREVIA</h3>
+            </div>
+            <p>&copy; 2026 AUREVIA. All rights reserved.</p>
+            <div class="redes-sociais">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Biblioteca do Supabase (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Arquivo de configuração do Supabase -->
+    <script src="js/supabase-config.js"></script>
+    <!-- Script principal do site -->
+    <script src="js/main.js"></script>
+</body>
+</html>

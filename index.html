@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUREVIA | Elegance That Lasts Forever</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <a href="#"><i class="fas fa-universal-access"></i> ACCESSIBILITY</a>
+            </div>
+            <div class="top-bar-center">
+                <p>Complimentary shipping on orders over $500* <a href="#">SEE DETAILS</a></p>
+            </div>
+            <div class="top-bar-right">
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Find a Store</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="login.html"><i class="far fa-user"></i> ACCOUNT</a>
+            </div>
+            <div class="logo">
+                <h1><a href="index.html">AUREVIA</a></h1>
+            </div>
+            <div class="header-right">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="far fa-heart"></i></a>
+                <a href="carrinho.html" class="carrinho-icon"><i class="fas fa-shopping-bag"></i> <span class="badge" id="cart-badge">0</span></a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="produtos.html">Jewelry</a></li>
+                    <li><a href="#">Wedding</a></li>
+                    <li><a href="#">Watches</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Gifts</a></li>
+                    <li><a href="sobre.html">About</a></li>
+                    <li><a href="#" class="sale-link">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h2><em>yes</em> FOREVER</h2>
+                <p>Discover the jewelry that symbolizes your eternal moments.</p>
+                <a href="produtos.html" class="btn-hero">FIND YOUR PERFECT PIECE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="destaques">
+        <div class="container">
+            <h2 class="titulo-secao">Featured Collection</h2>
+            <div class="grid-produtos">
+                <div class="produto-card">
+                    <div class="produto-imagem">
+                        <img src="img/anel-solitario.jpg" alt="Eternity Solitaire Ring">
+                    </div>
+                    <h3>Eternity Solitaire Ring</h3>
+                    <p class="preco">$ 4,900.00</p>
+                    <a href="produto.html" class="btn-produto">VIEW DETAILS</a>
+                </div>
+                <div class="produto-card">
+                    <div class="produto-imagem">
+                        <img src="img/colar-perola.jpg" alt="Classic Pearl Necklace">
+                    </div>
+                    <h3>Classic Pearl Necklace</h3>
+                    <p class="preco">$ 2,750.00</p>
+                    <a href="produto.html" class="btn-produto">VIEW DETAILS</a>
+                </div>
+                <div class="produto-card">
+                    <div class="produto-imagem">
+                        <img src="img/brinco-diamante.jpg" alt="Lumière Diamond Earrings">
+                    </div>
+                    <h3>Lumière Diamond Earrings</h3>
+                    <p class="preco">$ 6,300.00</p>
+                    <a href="produto.html" class="btn-produto">VIEW DETAILS</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="sobre">
+        <div class="container sobre-content">
+            <h2>The AUREVIA Essence</h2>
+            <p>Born from a passion for creating jewelry that transcends time. Each AUREVIA piece is meticulously designed to celebrate life's most precious moments, blending artisanal tradition with contemporary design.</p>
+            <a href="#" class="btn-secundario">OUR STORY</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h3>AUREVIA</h3>
+            </div>
+            <p>&copy; 2026 AUREVIA. All rights reserved.</p>
+            <div class="redes-sociais">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="testarLogout()" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; padding: 10px 20px; background: #c5a059; color: #fff; border: none; cursor: pointer;">
+    TESTAR LOGOUT
+    </button>
+    <script src="js/main.js"></script>
+</body>
+</html>

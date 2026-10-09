@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUREVIA | Create Account</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <a href="#"><i class="fas fa-universal-access"></i> ACCESSIBILITY</a>
+            </div>
+            <div class="top-bar-center">
+                <p>Complimentary shipping on orders over $500* <a href="#">SEE DETAILS</a></p>
+            </div>
+            <div class="top-bar-right">
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Find a Store</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="login.html"><i class="far fa-user"></i> ACCOUNT</a>
+            </div>
+            <div class="logo">
+                <h1><a href="index.html">AUREVIA</a></h1>
+            </div>
+            <div class="header-right">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="far fa-heart"></i></a>
+                <a href="carrinho.html" class="carrinho-icon"><i class="fas fa-shopping-bag"></i> <span class="badge" id="cart-badge">0</span></a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="produtos.html">Jewelry</a></li>
+                    <li><a href="#">Wedding</a></li>
+                    <li><a href="#">Watches</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Gifts</a></li>
+                    <li><a href="sobre.html">About</a></li>
+                    <li><a href="#" class="sale-link">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- REGISTER SECTION -->
+    <main class="register-page">
+        <div class="container register-container">
+            <div class="register-box">
+                <h2>Create Account</h2>
+                <p class="register-subtitle">Join AUREVIA and enjoy exclusive benefits.</p>
+
+                <form class="register-form" id="register-form" action="#" method="POST">
+                    <!-- DADOS PESSOAIS -->
+                    <h3 class="form-section-title">Personal Information</h3>
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" name="name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <input type="email" id="register-email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Phone Number</label>
+                        <input type="tel" id="register-phone" name="phone" placeholder="+1 (555) 000-0000" required>
+                    </div>
+
+                    <!-- ENDEREÇO DE ENTREGA -->
+                    <h3 class="form-section-title">Shipping Address</h3>
+                    <div class="form-group">
+                        <label for="register-address">Street Address</label>
+                        <input type="text" id="register-address" name="address" placeholder="Street address, apt, suite" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-city">City</label>
+                            <input type="text" id="register-city" name="city" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-state">State / Province</label>
+                            <input type="text" id="register-state" name="state" placeholder="State" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-zip">ZIP / Postal Code</label>
+                            <input type="text" id="register-zip" name="zip" placeholder="ZIP Code" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-country">Country</label>
+                            <select id="register-country" name="country" required>
+                                <option value="">Select your country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="EU">European Union</option>
+                                <option value="BR">Brazil</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- INFORMAÇÕES FISCAIS -->
+                    <h3 class="form-section-title">Tax Information</h3>
+                    <div class="form-group">
+                        <label for="register-taxid">Tax ID / SSN / CPF (Optional)</label>
+                        <input type="text" id="register-taxid" name="taxid" placeholder="For customs and tax purposes">
+                    </div>
+
+                    <!-- SENHA -->
+                    <h3 class="form-section-title">Security</h3>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                    </div>
+
+                    <!-- TERMOS -->
+                    <div class="form-checkbox">
+                        <label>
+                            <input type="checkbox" required> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-auth">CREATE ACCOUNT</button>
+                </form>
+
+                <div class="login-link">
+                    <p>Already have an account? <a href="login.html">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h3>AUREVIA</h3>
+            </div>
+            <p>&copy; 2026 AUREVIA. All rights reserved.</p>
+            <div class="redes-sociais">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Biblioteca do Supabase (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Arquivo de configuração do Supabase -->
+    <script src="js/supabase-config.js"></script>
+    <!-- Script principal do site -->
+    <script src="js/main.js"></script>
+</body>
+</html>
