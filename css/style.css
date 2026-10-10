@@ -2600,7 +2600,7 @@ footer {
 
     /* Se a logo for IMAGEM (<img>) */
     .logo img {
-        max-height: 150px !important;   /* ⬅️ AUMENTA AQUI */
+        max-height: 200px !important;   /* ⬅️ AUMENTA AQUI */
         height: auto !important;
         width: auto !important;
         display: block !important;
