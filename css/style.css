@@ -2600,7 +2600,7 @@ footer {
 
     /* Se a logo for IMAGEM (<img>) */
     .logo img {
-        max-height: 200px !important;   /* ⬅️ AUMENTA AQUI */
+        max-height: 120px !important;   /* ⬅️ AUMENTA AQUI */
         height: auto !important;
         width: auto !important;
         display: block !important;
@@ -2634,7 +2634,7 @@ footer {
 /* --- Mobile pequeno (iPhone SE e outros) --- */
 @media screen and (max-width: 380px) {
     .logo img {
-        max-height: 50px !important;   /* Um pouco menor em telas pequenas */
+        max-height: 100px !important;   /* Um pouco menor em telas pequenas */
     }
     .logo h1 a {
         font-size: 1.7rem !important;
