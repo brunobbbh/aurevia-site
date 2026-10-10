@@ -2054,3 +2054,431 @@ footer {
         max-width: 100% !important;
     }
 }
+
+/* ==========================================
+   AUREVIA - IDENTIDADE VISUAL DO BRIEFING
+   Cores oficiais + Tipografia refinada
+   ========================================== */
+
+:root {
+    --aurevia-grafite: #1C1C1C;
+    --aurevia-dourado: #C5A059;
+    --aurevia-branco: #FFFFFF;
+    --aurevia-offwhite: #F4EFE9;
+    --aurevia-cinza: #666666;
+}
+
+/* ---------- FUNDO GERAL: Off-White Quente ---------- */
+body {
+    background-color: var(--aurevia-offwhite) !important;
+    color: var(--aurevia-grafite) !important;
+}
+
+/* ---------- TOP BAR: Grafite Profundo ---------- */
+.top-bar {
+    background-color: var(--aurevia-grafite) !important;
+    color: var(--aurevia-branco) !important;
+    padding: 10px 0 !important;
+}
+.top-bar a,
+.top-bar p {
+    color: var(--aurevia-branco) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 1px !important;
+}
+.top-bar a:hover {
+    color: var(--aurevia-dourado) !important;
+}
+.top-bar-center p a {
+    color: var(--aurevia-dourado) !important;
+    text-decoration: underline !important;
+}
+
+/* ---------- HEADER: limpo, elegante ---------- */
+header {
+    background-color: var(--aurevia-branco) !important;
+    border-bottom: 1px solid rgba(28, 28, 28, 0.08) !important;
+}
+.header-content {
+    padding: 25px 0 !important;
+}
+.logo h1 a {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--aurevia-grafite) !important;
+    font-weight: 400 !important;
+    letter-spacing: 8px !important;
+}
+.header-left a,
+.header-right a {
+    color: var(--aurevia-grafite) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 1.5px !important;
+}
+.header-right a:hover {
+    color: var(--aurevia-dourado) !important;
+}
+
+/* ---------- MENU: Montserrat, espaçamento generoso ---------- */
+.main-nav {
+    background-color: var(--aurevia-branco) !important;
+    border-top: 1px solid rgba(28, 28, 28, 0.08) !important;
+    padding: 18px 0 !important;
+}
+.main-nav ul {
+    gap: 35px !important;
+}
+.main-nav a {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--aurevia-grafite) !important;
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    transition: color 0.3s ease !important;
+}
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--aurevia-dourado) !important;
+}
+.main-nav .sale-link {
+    color: var(--aurevia-dourado) !important;
+}
+
+/* ---------- HERO: fundo off-white, tipografia grande ---------- */
+.hero {
+    background-color: var(--aurevia-offwhite) !important;
+    padding: 100px 0 !important;
+    text-align: center !important;
+}
+.hero-text h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 4.5rem !important;
+    color: var(--aurevia-grafite) !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 20px !important;
+}
+.hero-text h2 em {
+    font-style: italic !important;
+    color: var(--aurevia-dourado) !important;
+    font-size: 0.7em !important;
+    display: block !important;
+    margin-bottom: 10px !important;
+}
+.hero-text p {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--aurevia-cinza) !important;
+    font-size: 1rem !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 35px !important;
+}
+.btn-hero {
+    background-color: var(--aurevia-dourado) !important;
+    color: var(--aurevia-branco) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 3px !important;
+    padding: 18px 40px !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+}
+.btn-hero:hover {
+    background-color: var(--aurevia-grafite) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* ---------- TÍTULOS DE SEÇÃO ---------- */
+.titulo-secao {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--aurevia-grafite) !important;
+    font-size: 2.5rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 3px !important;
+    text-align: center !important;
+    margin: 60px 0 40px !important;
+}
+
+/* ---------- CARDS DE PRODUTO ---------- */
+.grid-produtos {
+    gap: 30px !important;
+}
+.produto-card {
+    background-color: var(--aurevia-branco) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 20px !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+}
+.produto-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 40px rgba(28, 28, 28, 0.08) !important;
+}
+.produto-imagem {
+    background-color: var(--aurevia-offwhite) !important;
+    padding: 30px !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+.produto-imagem img {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 220px !important;
+    object-fit: contain !important;
+    transition: transform 0.4s ease !important;
+}
+.produto-card:hover .produto-imagem img {
+    transform: scale(1.05) !important;
+}
+.produto-card h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--aurevia-grafite) !important;
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    margin: 15px 0 10px !important;
+    min-height: 50px !important;
+}
+.produto-card .preco {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--aurevia-dourado) !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 20px !important;
+}
+.produto-card .btn-produto {
+    background-color: transparent !important;
+    color: var(--aurevia-grafite) !important;
+    border: 1px solid var(--aurevia-grafite) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 2px !important;
+    padding: 12px 28px !important;
+    text-transform: uppercase !important;
+    transition: all 0.3s ease !important;
+    display: inline-block !important;
+}
+.produto-card .btn-produto:hover {
+    background-color: var(--aurevia-dourado) !important;
+    border-color: var(--aurevia-dourado) !important;
+    color: var(--aurevia-branco) !important;
+}
+
+/* ---------- SEÇÃO SOBRE ---------- */
+.sobre {
+    background-color: var(--aurevia-grafite) !important;
+    color: var(--aurevia-branco) !important;
+    padding: 100px 0 !important;
+    text-align: center !important;
+}
+.sobre h2 {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--aurevia-dourado) !important;
+    font-size: 2.5rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 3px !important;
+    margin-bottom: 25px !important;
+}
+.sobre p {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--aurevia-offwhite) !important;
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+    max-width: 700px !important;
+    margin: 0 auto 30px !important;
+    letter-spacing: 0.5px !important;
+}
+.btn-secundario {
+    background-color: transparent !important;
+    color: var(--aurevia-dourado) !important;
+    border: 1px solid var(--aurevia-dourado) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 3px !important;
+    padding: 16px 40px !important;
+    text-transform: uppercase !important;
+    transition: all 0.3s ease !important;
+    display: inline-block !important;
+}
+.btn-secundario:hover {
+    background-color: var(--aurevia-dourado) !important;
+    color: var(--aurevia-branco) !important;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    background-color: var(--aurevia-grafite) !important;
+    color: var(--aurevia-offwhite) !important;
+    padding: 50px 0 30px !important;
+    text-align: center !important;
+}
+.footer-content h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--aurevia-dourado) !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 6px !important;
+    font-weight: 400 !important;
+    margin-bottom: 20px !important;
+}
+.footer-content p {
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--aurevia-cinza) !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 1px !important;
+}
+.redes-sociais {
+    justify-content: center !important;
+    gap: 25px !important;
+    margin-top: 20px !important;
+}
+.redes-sociais a {
+    color: var(--aurevia-offwhite) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 2px !important;
+    transition: color 0.3s ease !important;
+}
+.redes-sociais a:hover {
+    color: var(--aurevia-dourado) !important;
+}
+
+.hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Overlay para o texto ficar legível sobre a imagem */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(244, 239, 233, 0.75); /* Off-White com transparência */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Mobile: trocar para a versão vertical */
+@media screen and (max-width: 768px) {
+    .hero {
+        background-image: url('img/hero-mobile.jpg') !important;
+        min-height: 500px;
+    }
+}
+
+/* ==========================================
+   LOGO AUREVIA - TAMANHO E ESPAÇAMENTO
+   ========================================== */
+
+/* --- HEADER: ajustar altura e centralização --- */
+.header-content {
+    padding: 25px 0 !important;
+    align-items: center !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+/* --- LOGO COMO IMAGEM --- */
+.logo {
+    flex: 1 !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.logo img {
+    max-height: 150px !important;    /* ⬅️ AUMENTA A LOGO AQUI */
+    width: auto !important;
+    display: block !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.logo img:hover {
+    opacity: 0.85 !important;
+}
+
+/* Se o logo ainda for <h1>, este bloco garante o tamanho */
+.logo h1 a {
+    font-family: 'Playfair Display', serif !important;
+    color: #C5A059 !important;
+    font-weight: 400 !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 10px !important;
+    line-height: 1 !important;
+}
+
+/* --- MENU: mais respiro --- */
+.main-nav {
+    padding: 20px 0 !important;
+    border-top: 1px solid rgba(28, 28, 28, 0.08) !important;
+}
+
+.main-nav ul {
+    gap: 35px !important;
+    justify-content: center !important;
+}
+
+/* --- TABLET --- */
+@media screen and (max-width: 1024px) {
+    .logo img {
+        max-height: 48px !important;
+    }
+    .header-content {
+        padding: 20px 0 !important;
+    }
+}
+
+/* --- MOBILE --- */
+@media screen and (max-width: 768px) {
+    .header-content {
+        padding: 15px 0 !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    .logo {
+        order: -1 !important;
+        width: 100% !important;
+    }
+    .logo img {
+        max-height: 45px !important;  /* ⬅️ Logo no mobile */
+    }
+    .header-left,
+    .header-right {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    .main-nav {
+        padding: 15px 0 !important;
+    }
+    .main-nav ul {
+        gap: 20px !important;
+        flex-wrap: wrap !important;
+    }
+}
+
+/* --- MOBILE PEQUENO --- */
+@media screen and (max-width: 380px) {
+    .logo img {
+        max-height: 38px !important;
+    }
+}
