@@ -2351,6 +2351,7 @@ footer {
 }
 
 .hero {
+    background-image: url('../img/hero.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -2380,7 +2381,7 @@ footer {
 /* Mobile: trocar para a versão vertical */
 @media screen and (max-width: 768px) {
     .hero {
-        background-image: url('img/hero-mobile.jpg') !important;
+        background-image: url('../img/hero-mobile.jpg') !important;
         min-height: 500px;
     }
 }
