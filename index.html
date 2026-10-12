@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://brunobbbh.github.io/aurevia-site/">
@@ -54,41 +55,66 @@
             <div class="header-left">
                 <a href="login.html"><i class="far fa-user"></i> ACCOUNT</a>
             </div>
+
             <div class="logo">
                 <a href="index.html">
-                <img src="img/logo-aurevia.png" alt="AUREVIA" style="max-height: 60px; width: auto;">
+                    <img src="img/logo-aurevia.png" alt="AUREVIA" style="max-height: 60px; width: auto;">
                 </a>
             </div>
+
             <div class="header-right">
+                <!-- SELETOR DE PAÍS -->
+                <div class="country-selector">
+                    <button class="country-btn" id="country-btn" aria-label="Select country">
+                        <span id="flag-icon">🇺🇸</span>
+                        <span id="country-code">US</span>
+                        <span id="country-currency">USD</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="country-list" id="country-list">
+                        <li data-country="US" data-currency="USD" data-flag="🇺🇸">
+                            <span>🇺🇸</span> United States <small>(USD)</small>
+                        </li>
+                        <li data-country="BR" data-currency="BRL" data-flag="🇧🇷">
+                            <span>🇧🇷</span> Brasil <small>(BRL)</small>
+                        </li>
+                    </ul>
+                </div>
+
                 <a href="#"><i class="fas fa-search"></i></a>
                 <a href="#"><i class="far fa-heart"></i></a>
                 <a href="carrinho.html" class="carrinho-icon"><i class="fas fa-shopping-bag"></i> <span class="badge" id="cart-badge">0</span></a>
             </div>
         </div>
+
         <nav class="main-nav">
-    <div class="container">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="produtos.html">All Jewelry</a></li>
-            <li><a href="produtos.html?category=Watches">Watches</a></li>
-            <li><a href="produtos.html?category=Charms">Charms</a></li>
-            <li><a href="produtos.html?category=Bracelets">Bracelets</a></li>
-            <li><a href="sobre.html">About</a></li>
-        </ul>
-    </div>
-</nav>
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="produtos.html">All Jewelry</a></li>
+                    <li><a href="produtos.html?category=Watches">Watches</a></li>
+                    <li><a href="produtos.html?category=Charms">Charms</a></li>
+                    <li><a href="produtos.html?category=Bracelets">Bracelets</a></li>
+                    <li><a href="sobre.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <!-- HERO SECTION -->
     <section class="hero">
-    <div class="container hero-content">
-        <div class="hero-text">
-            <h2><em>yes</em> FOREVER</h2>
-            <p>Discover the jewelry that symbolizes your eternal moments.</p>
-            <a href="produtos.html" class="btn-hero">FIND YOUR PERFECT PIECE</a>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h2><em>yes</em> FOREVER</h2>
+                <p class="hero-distributor">
+                    Official Worldwide Distributor of Rommanel
+                </p>
+                <p>Discover the jewelry that symbolizes your eternal moments.</p>
+                <a href="produtos.html" class="btn-hero">FIND YOUR PERFECT PIECE</a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
     <!-- FEATURED PRODUCTS (3 ALEATÓRIOS DO BANCO) -->
     <section class="destaques">
         <div class="container">
@@ -111,25 +137,26 @@
     <!-- FOOTER -->
     <footer>
         <div class="container footer-content">
-           <div class="footer-logo">
-               <h3>AUREVIA</h3>
-           </div>
-        
-           <p class="footer-distributor">
-               Official Worldwide Distributor of Rommanel
-           </p>
-        
-           <p class="footer-copy">
-               &copy; 2026 AUREVIA. All rights reserved.
-           </p>
-        
-           <div class="redes-sociais">
-               <a href="#">Instagram</a>
-               <a href="#">Facebook</a>
-               <a href="#">WhatsApp</a>
-           </div>
-       </div>
-   </footer>
+            <div class="footer-logo">
+                <h3>AUREVIA</h3>
+            </div>
+
+            <p class="footer-distributor">
+                Official Worldwide Distributor of Rommanel
+            </p>
+
+            <p class="footer-copy">
+                &copy; 2026 AUREVIA. All rights reserved.
+            </p>
+
+            <div class="redes-sociais">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
     <!-- Biblioteca do Supabase (via CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Arquivo de configuração do Supabase (contém supabaseClient) -->

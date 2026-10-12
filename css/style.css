@@ -2641,3 +2641,109 @@ footer {
         letter-spacing: 6px !important;
     }
 }
+
+/* ==========================================
+   SELETOR DE PAÍS / MOEDA
+   ========================================== */
+.country-selector {
+    position: relative !important;
+    display: inline-block !important;
+    margin-left: 20px !important;
+}
+
+.country-btn {
+    background-color: transparent !important;
+    border: 1px solid rgba(28, 28, 28, 0.2) !important;
+    padding: 8px 14px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 1px !important;
+    color: #1C1C1C !important;
+    transition: all 0.3s ease !important;
+    border-radius: 0 !important;
+}
+
+.country-btn:hover {
+    border-color: #C5A059 !important;
+    color: #C5A059 !important;
+}
+
+.country-btn #flag-icon {
+    font-size: 1.1rem !important;
+    line-height: 1 !important;
+}
+
+.country-btn #country-currency {
+    font-weight: 600 !important;
+    color: #C5A059 !important;
+}
+
+.country-btn i {
+    font-size: 0.6rem !important;
+    opacity: 0.6 !important;
+    margin-left: 4px !important;
+}
+
+.country-list {
+    position: absolute !important;
+    top: calc(100% + 5px) !important;
+    right: 0 !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(28, 28, 28, 0.1) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    list-style: none !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+    min-width: 220px !important;
+    z-index: 9999 !important;
+    display: none !important;
+}
+
+.country-list.open {
+    display: block !important;
+}
+
+.country-list li {
+    padding: 12px 18px !important;
+    cursor: pointer !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.78rem !important;
+    color: #1C1C1C !important;
+    letter-spacing: 0.5px !important;
+    transition: background-color 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.country-list li:hover {
+    background-color: #F4EFE9 !important;
+    color: #C5A059 !important;
+}
+
+.country-list li small {
+    color: #666 !important;
+    font-size: 0.7rem !important;
+    margin-left: auto !important;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .country-selector {
+        margin: 8px auto 0 !important;
+        display: block !important;
+        text-align: center !important;
+    }
+    .country-btn {
+        margin: 0 auto !important;
+        justify-content: center !important;
+    }
+    .country-list {
+        right: 50% !important;
+        transform: translateX(50%) !important;
+    }
+}

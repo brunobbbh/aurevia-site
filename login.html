@@ -40,6 +40,24 @@
                 </a>
             </div>
             <div class="header-right">
+                <!-- SELETOR DE PAÍS -->
+                <div class="country-selector">
+                    <button class="country-btn" id="country-btn" aria-label="Select country">
+                        <span id="flag-icon">🇺🇸</span>
+                        <span id="country-code">US</span>
+                        <span id="country-currency">USD</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="country-list" id="country-list">
+                        <li data-country="US" data-currency="USD" data-flag="🇺🇸">
+                            <span>🇺🇸</span> United States <small>(USD)</small>
+                        </li>
+                        <li data-country="BR" data-currency="BRL" data-flag="🇧🇷">
+                            <span>🇧🇷</span> Brasil <small>(BRL)</small>
+                        </li>
+                    </ul>
+                </div>
+
                 <a href="#"><i class="fas fa-search"></i></a>
                 <a href="#"><i class="far fa-heart"></i></a>
                 <a href="carrinho.html" class="carrinho-icon"><i class="fas fa-shopping-bag"></i> <span class="badge" id="cart-badge">0</span></a>

@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==========================================
-// 3. CATÁLOGO DE PRODUTOS (com filtro pela URL)
+// 3. CATÁLOGO DE PRODUTOS (com filtro pela URL + multi-moeda)
 // ==========================================
 document.addEventListener('DOMContentLoaded', async function() {
     const productGrid = document.getElementById('product-grid');
@@ -105,8 +105,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const sortFilter = document.getElementById('filter-sort');
 
     if (productGrid) {
-
-        // ⭐ ESSAS DUAS LINHAS SÃO A CHAVE DE TUDO
         const urlParams = new URLSearchParams(window.location.search);
         const categoriaInicial = urlParams.get('category') || 'all';
 
@@ -129,7 +127,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 }
 
                 const { data: products, error } = await query;
-
                 if (error) throw error;
 
                 productGrid.innerHTML = '';
@@ -140,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 }
 
                 products.forEach(product => {
-                    const displayPrice = product.sale_price || product.price;
+                    const usdPrice = parseFloat(product.sale_price).toFixed(2);
                     const card = document.createElement('div');
                     card.className = 'produto-card';
                     card.innerHTML = `
@@ -149,11 +146,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                                  onerror="this.src='img/placeholder.jpg'">
                         </div>
                         <h3>${product.name}</h3>
-                        <p class="preco">$ ${parseFloat(displayPrice).toFixed(2)}</p>
+                        <p class="preco"
+                           data-price-usd="${product.sale_price}"
+                           data-price-brl="${product.price_brl || product.price}">
+                            $ ${usdPrice}
+                        </p>
                         <a href="produto.html?id=${product.id}" class="btn-produto">VIEW DETAILS</a>
                     `;
                     productGrid.appendChild(card);
                 });
+
+                if (typeof updateAllPrices === 'function') {
+                    updateAllPrices();
+                }
 
             } catch (error) {
                 console.error('Error loading products:', error);
@@ -161,10 +166,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
 
-        // ⭐ Carrega com a categoria vinda da URL
         loadProducts(categoriaInicial);
 
-        // Sincroniza o select com a URL (se veio ?category=Watches, o select mostra Watches)
         if (categoryFilter && categoriaInicial !== 'all') {
             categoryFilter.value = categoriaInicial;
         }
@@ -184,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // ==========================================
-// 4. PÁGINA DE PRODUTO INDIVIDUAL (Supabase + PayPal)
+// 4. PÁGINA DE PRODUTO INDIVIDUAL (Supabase + PayPal + multi-moeda)
 // ==========================================
 document.addEventListener('DOMContentLoaded', async function() {
     const productDetail = document.getElementById('product-detail');
@@ -214,10 +217,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 return;
             }
 
+            // Salva globalmente para o seletor de país poder atualizar
+            window.currentProduct = product;
+
             if (breadcrumbName) breadcrumbName.textContent = product.name;
             document.title = `AUREVIA | ${product.name}`;
 
-            const displayPrice = product.sale_price || product.price;
+            const usdPrice = parseFloat(product.sale_price).toFixed(2);
 
             productDetail.innerHTML = `
                 <div class="product-image">
@@ -225,7 +231,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </div>
                 <div class="product-info">
                     <h1>${product.name}</h1>
-                    <p class="product-price">$ ${parseFloat(displayPrice).toFixed(2)}</p>
+                    <p class="product-price"
+                       data-price-usd="${product.sale_price}"
+                       data-price-brl="${product.price_brl || product.price}">
+                        $ ${usdPrice}
+                    </p>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -260,15 +270,17 @@ document.addEventListener('DOMContentLoaded', async function() {
                         </button>
                     </div>
 
-                    <!-- Botão do PayPal (só aparece se estiver logado) -->
                     <div id="paypal-button-container" style="margin-top: 20px;"></div>
                 </div>
             `;
 
-            // Inicializar o botão do PayPal (verifica login internamente)
+            if (typeof updateAllPrices === 'function') {
+                updateAllPrices();
+            }
+
             initPayPalButton(product);
 
-            // Carregar produtos relacionados
+            // Carrega produtos relacionados
             if (relatedGrid) {
                 const { data: related } = await supabaseClient
                     .from('products')
@@ -280,7 +292,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (related && related.length > 0) {
                     relatedGrid.innerHTML = '';
                     related.forEach(item => {
-                        const price = item.sale_price || item.price;
+                        const itemUsd = parseFloat(item.sale_price).toFixed(2);
                         const card = document.createElement('div');
                         card.className = 'produto-card';
                         card.innerHTML = `
@@ -288,11 +300,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                                 <img src="${item.image_url}" alt="${item.name}">
                             </div>
                             <h3>${item.name}</h3>
-                            <p class="preco">$ ${parseFloat(price).toFixed(2)}</p>
+                            <p class="preco"
+                               data-price-usd="${item.sale_price}"
+                               data-price-brl="${item.price_brl || item.price}">
+                                $ ${itemUsd}
+                            </p>
                             <a href="produto.html?id=${item.id}" class="btn-produto">VIEW DETAILS</a>
                         `;
                         relatedGrid.appendChild(card);
                     });
+
+                    if (typeof updateAllPrices === 'function') {
+                        updateAllPrices();
+                    }
                 } else {
                     relatedGrid.innerHTML = '<p class="no-products">No related products found.</p>';
                 }
@@ -306,7 +326,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // ==========================================
-// 5. BOTÃO DE PAGAMENTO PAYPAL (com verificação de login + salvar pedido + redirecionar)
+// 5. BOTÃO DE PAGAMENTO PAYPAL (produto individual)
 // ==========================================
 async function initPayPalButton(product) {
     const container = document.getElementById('paypal-button-container');
@@ -331,8 +351,7 @@ async function initPayPalButton(product) {
 
     if (typeof paypal === 'undefined') return;
 
-    const displayPrice = product.sale_price || product.price;
-    const priceInUSD = parseFloat(displayPrice).toFixed(2);
+    const priceInUSD = parseFloat(product.sale_price).toFixed(2);
 
     container.innerHTML = '';
 
@@ -384,6 +403,20 @@ async function initPayPalButton(product) {
 
                     if (orderError) throw orderError;
 
+                    // Salvar item do pedido para aparecer no e-mail
+                    const { error: itemError } = await supabaseClient
+                        .from('order_items')
+                        .insert([{
+                            order_id: orderData.id,
+                            product_id: product.id,
+                            product_name: product.name,
+                            product_sku: product.sku || 'N/A',
+                            quantity: 1,
+                            price: parseFloat(priceInUSD)
+                        }]);
+
+                    if (itemError) console.error('Erro ao salvar item do pedido:', itemError);
+
                     window.location.href = `obrigado.html?order_id=${orderData.id}`;
 
                 } catch (error) {
@@ -406,7 +439,7 @@ async function initPayPalButton(product) {
 }
 
 // ==========================================
-// FUNÇÃO TEMPORÁRIA DE LOGOUT (PARA TESTES)
+// FUNÇÃO DE LOGOUT (para testes)
 // ==========================================
 window.testarLogout = async function() {
     const { error } = await supabaseClient.auth.signOut();
@@ -490,7 +523,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // ==========================================
-// 7. CARRINHO DE COMPRAS (localStorage)
+// 7. CARRINHO DE COMPRAS (localStorage + multi-moeda)
 // ==========================================
 
 function getCart() {
@@ -522,7 +555,8 @@ function addToCart(product, quantity = 1) {
         cart.push({
             id: product.id,
             name: product.name,
-            price: product.sale_price || product.price,
+            price_usd: parseFloat(product.sale_price),
+            price_brl: parseFloat(product.price_brl || product.price),
             image_url: product.image_url,
             sku: product.sku,
             quantity: quantity
@@ -572,6 +606,8 @@ function renderCart() {
     const cartItemsContainer = document.getElementById('cart-items');
     const cartSummaryContainer = document.getElementById('cart-summary');
     const cart = getCart();
+    const country = localStorage.getItem('aurevia_country') || 'US';
+    const isBR = country === 'BR';
 
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = `
@@ -590,8 +626,12 @@ function renderCart() {
     let subtotal = 0;
 
     cart.forEach(item => {
-        const itemTotal = parseFloat(item.price) * item.quantity;
+        const itemPrice = isBR ? item.price_brl : item.price_usd;
+        const itemTotal = itemPrice * item.quantity;
         subtotal += itemTotal;
+        const priceDisplay = isBR
+            ? `R$ ${itemPrice.toFixed(2).replace('.', ',')}`
+            : `$ ${itemPrice.toFixed(2)}`;
 
         const itemElement = document.createElement('div');
         itemElement.className = 'cart-item';
@@ -602,7 +642,7 @@ function renderCart() {
             <div class="cart-item-info">
                 <h3>${item.name}</h3>
                 <p class="item-sku">SKU: ${item.sku || 'N/A'}</p>
-                <p class="item-price">$ ${parseFloat(item.price).toFixed(2)}</p>
+                <p class="item-price">${priceDisplay}</p>
             </div>
             <div class="cart-item-controls">
                 <div class="quantity-control">
@@ -618,11 +658,15 @@ function renderCart() {
         cartItemsContainer.appendChild(itemElement);
     });
 
+    const subtotalDisplay = isBR
+        ? `R$ ${subtotal.toFixed(2).replace('.', ',')}`
+        : `$ ${subtotal.toFixed(2)}`;
+
     cartSummaryContainer.innerHTML = `
         <h2>Order Summary</h2>
         <div class="cart-summary-row">
             <span>Subtotal</span>
-            <span>$ ${subtotal.toFixed(2)}</span>
+            <span>${subtotalDisplay}</span>
         </div>
         <div class="cart-summary-row">
             <span>Shipping</span>
@@ -630,7 +674,7 @@ function renderCart() {
         </div>
         <div class="cart-summary-row total">
             <span>Total</span>
-            <span>$ ${subtotal.toFixed(2)}</span>
+            <span>${subtotalDisplay}</span>
         </div>
         <button class="btn-checkout" onclick="proceedToCheckout()">PROCEED TO CHECKOUT</button>
         <a href="produtos.html" class="btn-continue-shopping">Continue Shopping</a>
@@ -691,7 +735,7 @@ window.handleAddToCart = async function(productId) {
 };
 
 // ==========================================
-// 10. PÁGINA DE CHECKOUT (checkout.html)
+// 10. PÁGINA DE CHECKOUT (checkout.html) - SEMPRE EM USD
 // ==========================================
 document.addEventListener('DOMContentLoaded', async function() {
     const checkoutItemsList = document.getElementById('checkout-items-list');
@@ -722,7 +766,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         let subtotal = 0;
 
         cart.forEach(item => {
-            const itemTotal = parseFloat(item.price) * item.quantity;
+            // Checkout SEMPRE em USD
+            const itemTotal = parseFloat(item.price_usd) * item.quantity;
             subtotal += itemTotal;
 
             const itemElement = document.createElement('div');
@@ -751,7 +796,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <span>Free</span>
             </div>
             <div class="checkout-summary-row total">
-                <span>Total</span>
+                <span>Total (USD)</span>
                 <span>$ ${subtotal.toFixed(2)}</span>
             </div>
         `;
@@ -825,7 +870,7 @@ function initPayPalCheckout(cart, subtotal, customerData, userEmail) {
                         product_name: item.name,
                         product_sku: item.sku,
                         quantity: item.quantity,
-                        price: parseFloat(item.price)
+                        price: parseFloat(item.price_usd)
                     }));
 
                     const { error: itemsError } = await supabaseClient
@@ -858,16 +903,11 @@ function initPayPalCheckout(cart, subtotal, customerData, userEmail) {
 }
 
 // ==========================================
-// 12. PRODUTOS ALEATÓRIOS NA HOME (3 por vez)
+// 12. PRODUTOS ALEATÓRIOS NA HOME (3 por vez + multi-moeda)
 // ==========================================
 document.addEventListener('DOMContentLoaded', async function() {
-    // Só roda se existir o grid da home
     const homeGrid = document.getElementById('produtos-destaque');
-    
-    // Se não estiver na home, sai
     if (!homeGrid) return;
-
-    // Se estiver na página de produto, sai
     if (document.getElementById('product-detail')) return;
 
     try {
@@ -878,20 +918,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (error) throw error;
         if (!todosProdutos || todosProdutos.length === 0) return;
 
-        // Embaralhar (Fisher-Yates)
         const embaralhados = [...todosProdutos];
         for (let i = embaralhados.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [embaralhados[i], embaralhados[j]] = [embaralhados[j], embaralhados[i]];
         }
 
-        // Pegar 3 aleatórios
         const selecionados = embaralhados.slice(0, 3);
 
-        // Renderizar
         homeGrid.innerHTML = '';
         selecionados.forEach(product => {
-            const displayPrice = product.sale_price || product.price;
+            const usdPrice = parseFloat(product.sale_price).toFixed(2);
             const card = document.createElement('div');
             card.className = 'produto-card';
             card.innerHTML = `
@@ -900,13 +937,124 @@ document.addEventListener('DOMContentLoaded', async function() {
                          onerror="this.src='img/placeholder.jpg'">
                 </div>
                 <h3>${product.name}</h3>
-                <p class="preco">$ ${parseFloat(displayPrice).toFixed(2)}</p>
+                <p class="preco"
+                   data-price-usd="${product.sale_price}"
+                   data-price-brl="${product.price_brl || product.price}">
+                    $ ${usdPrice}
+                </p>
                 <a href="produto.html?id=${product.id}" class="btn-produto">VIEW DETAILS</a>
             `;
             homeGrid.appendChild(card);
         });
 
+        if (typeof updateAllPrices === 'function') {
+            updateAllPrices();
+        }
+
     } catch (error) {
         console.error('Erro ao carregar produtos aleatórios:', error);
     }
 });
+
+// ==========================================
+// 13. SELETOR DE PAÍS / MOEDA
+// ==========================================
+
+async function detectCountry() {
+    const saved = localStorage.getItem('aurevia_country');
+    if (saved) return saved;
+
+    try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        const code = data.country_code || 'US';
+        const country = code === 'BR' ? 'BR' : 'US';
+        localStorage.setItem('aurevia_country', country);
+        return country;
+    } catch {
+        localStorage.setItem('aurevia_country', 'US');
+        return 'US';
+    }
+}
+
+function updateCountryButton() {
+    const country = localStorage.getItem('aurevia_country') || 'US';
+    const flagIcon = document.getElementById('flag-icon');
+    const countryCode = document.getElementById('country-code');
+    const countryCurrency = document.getElementById('country-currency');
+
+    if (!flagIcon) return;
+
+    if (country === 'BR') {
+        flagIcon.textContent = '🇧🇷';
+        if (countryCode) countryCode.textContent = 'BR';
+        if (countryCurrency) countryCurrency.textContent = 'BRL';
+    } else {
+        flagIcon.textContent = '🇺🇸';
+        if (countryCode) countryCode.textContent = 'US';
+        if (countryCurrency) countryCurrency.textContent = 'USD';
+    }
+}
+
+function updateAllPrices() {
+    const country = localStorage.getItem('aurevia_country') || 'US';
+
+    document.querySelectorAll('[data-price-usd]').forEach(el => {
+        const usd = el.dataset.priceUsd;
+        const brl = el.dataset.priceBrl;
+
+        if (country === 'BR') {
+            el.textContent = `R$ ${parseFloat(brl).toFixed(2).replace('.', ',')}`;
+        } else {
+            el.textContent = `$ ${parseFloat(usd).toFixed(2)}`;
+        }
+    });
+
+    updateCountryButton();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await detectCountry();
+    updateAllPrices();
+
+    const countryBtn = document.getElementById('country-btn');
+    const countryList = document.getElementById('country-list');
+
+    countryBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        countryList?.classList.toggle('open');
+    });
+
+    document.querySelectorAll('#country-list li').forEach(item => {
+        item.addEventListener('click', () => {
+            const country = item.dataset.country;
+            localStorage.setItem('aurevia_country', country);
+            updateAllPrices();
+            countryList?.classList.remove('open');
+
+            if (document.getElementById('product-detail') && window.currentProduct) {
+                const priceEl = document.querySelector('.product-price');
+                if (priceEl) {
+                    const p = window.currentProduct;
+                    if (country === 'BR') {
+                        const brl = p.price_brl || p.price;
+                        priceEl.textContent = `R$ ${parseFloat(brl).toFixed(2).replace('.', ',')}`;
+                    } else {
+                        priceEl.textContent = `$ ${parseFloat(p.sale_price).toFixed(2)}`;
+                    }
+                }
+            }
+
+            if (typeof renderCart === 'function' && document.getElementById('cart-items')) {
+                renderCart();
+            }
+        });
+    });
+
+    document.addEventListener('click', () => {
+        countryList?.classList.remove('open');
+    });
+});
+
+window.updateAllPrices = updateAllPrices;
+window.detectCountry = detectCountry;
