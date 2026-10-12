@@ -17,13 +17,13 @@
     <div class="top-bar">
         <div class="container top-bar-content">
             <div class="top-bar-left">
-                <a href="#"><i class="fas fa-universal-access"></i> ACCESSIBILITY</a>
+                <a href="#"><i class="fas fa-universal-access"></i> <span data-i18n="topbar.accessibility">ACCESSIBILITY</span></a>
             </div>
             <div class="top-bar-center">
-                <p>Complimentary shipping on orders over $500* <a href="#">SEE DETAILS</a></p>
+                <p><span data-i18n="topbar.shipping">Complimentary shipping on orders over $500*</span> <a href="#" data-i18n="topbar.see_details">SEE DETAILS</a></p>
             </div>
             <div class="top-bar-right">
-                <a href="#"><i class="fas fa-map-marker-alt"></i> Find a Store</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.find_store">Find a Store</span></a>
             </div>
         </div>
     </div>
@@ -32,11 +32,11 @@
     <header>
         <div class="container header-content">
             <div class="header-left">
-                <a href="login.html"><i class="far fa-user"></i> ACCOUNT</a>
+                <a href="login.html"><i class="far fa-user"></i> <span data-i18n="header.account">ACCOUNT</span></a>
             </div>
             <div class="logo">
                 <a href="index.html">
-                <img src="img/logo-aurevia.png" alt="AUREVIA">
+                    <img src="img/logo-aurevia.png" alt="AUREVIA">
                 </a>
             </div>
             <div class="header-right">
@@ -64,17 +64,17 @@
             </div>
         </div>
         <nav class="main-nav">
-    <div class="container">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="produtos.html">All Jewelry</a></li>
-            <li><a href="produtos.html?category=Watches">Watches</a></li>
-            <li><a href="produtos.html?category=Charms">Charms</a></li>
-            <li><a href="produtos.html?category=Bracelets">Bracelets</a></li>
-            <li><a href="sobre.html">About</a></li>
-        </ul>
-    </div>
-</nav>
+            <div class="container">
+                <ul>
+                    <li><a href="index.html" data-i18n="menu.home">Home</a></li>
+                    <li><a href="produtos.html" data-i18n="menu.all_jewelry">All Jewelry</a></li>
+                    <li><a href="produtos.html?category=Watches" data-i18n="menu.watches">Watches</a></li>
+                    <li><a href="produtos.html?category=Charms" data-i18n="menu.charms">Charms</a></li>
+                    <li><a href="produtos.html?category=Bracelets" data-i18n="menu.bracelets">Bracelets</a></li>
+                    <li><a href="sobre.html" data-i18n="menu.about">About</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <!-- PRODUCT DETAIL SECTION -->
@@ -82,12 +82,12 @@
         <div class="container">
             <!-- Breadcrumb -->
             <div class="breadcrumb">
-                <a href="index.html">Home</a> / <a href="produtos.html">Jewelry</a> / <span id="breadcrumb-product-name">Product</span>
+                <a href="index.html" data-i18n="menu.home">Home</a> / <a href="produtos.html" data-i18n="menu.all_jewelry">Jewelry</a> / <span id="breadcrumb-product-name">Product</span>
             </div>
 
             <div class="product-detail" id="product-detail">
                 <!-- O JavaScript vai preencher este bloco automaticamente -->
-                <p class="loading-message">Loading product...</p>
+                <p class="loading-message" data-i18n="catalog.loading">Loading product...</p>
             </div>
         </div>
     </main>
@@ -95,7 +95,7 @@
     <!-- RELATED PRODUCTS -->
     <section class="related-products">
         <div class="container">
-            <h2 class="titulo-secao">You May Also Like</h2>
+            <h2 class="titulo-secao" data-i18n="product.related_title">You May Also Like</h2>
             <div class="grid-produtos" id="related-products-grid">
                 <!-- O JavaScript vai preencher este bloco -->
             </div>
@@ -105,25 +105,25 @@
     <!-- FOOTER -->
     <footer>
         <div class="container footer-content">
-           <div class="footer-logo">
-               <h3>AUREVIA</h3>
-           </div>
-        
-           <p class="footer-distributor">
-               Official Worldwide Distributor of Rommanel
-           </p>
-        
-           <p class="footer-copy">
-               &copy; 2026 AUREVIA. All rights reserved.
-           </p>
-        
-           <div class="redes-sociais">
-               <a href="#">Instagram</a>
-               <a href="#">Facebook</a>
-               <a href="#">WhatsApp</a>
-           </div>
-       </div>
-   </footer>
+            <div class="footer-logo">
+                <h3>AUREVIA</h3>
+            </div>
+
+            <p class="footer-distributor" data-i18n="footer.distributor">
+                Official Worldwide Distributor of Rommanel
+            </p>
+
+            <p class="footer-copy" data-i18n="footer.rights">
+                &copy; 2026 AUREVIA. All rights reserved.
+            </p>
+
+            <div class="redes-sociais">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Biblioteca do Supabase (via CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

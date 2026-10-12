@@ -17,13 +17,13 @@
     <div class="top-bar">
         <div class="container top-bar-content">
             <div class="top-bar-left">
-                <a href="#"><i class="fas fa-universal-access"></i> ACCESSIBILITY</a>
+                <a href="#"><i class="fas fa-universal-access"></i> <span data-i18n="topbar.accessibility">ACCESSIBILITY</span></a>
             </div>
             <div class="top-bar-center">
-                <p>Complimentary shipping on orders over $500* <a href="#">SEE DETAILS</a></p>
+                <p><span data-i18n="topbar.shipping">Complimentary shipping on orders over $500*</span> <a href="#" data-i18n="topbar.see_details">SEE DETAILS</a></p>
             </div>
             <div class="top-bar-right">
-                <a href="#"><i class="fas fa-map-marker-alt"></i> Find a Store</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.find_store">Find a Store</span></a>
             </div>
         </div>
     </div>
@@ -32,11 +32,11 @@
     <header>
         <div class="container header-content">
             <div class="header-left">
-                <a href="login.html"><i class="far fa-user"></i> ACCOUNT</a>
+                <a href="login.html"><i class="far fa-user"></i> <span data-i18n="header.account">ACCOUNT</span></a>
             </div>
             <div class="logo">
                 <a href="index.html">
-                <img src="img/logo-aurevia.png" alt="AUREVIA">
+                    <img src="img/logo-aurevia.png" alt="AUREVIA">
                 </a>
             </div>
             <div class="header-right">
@@ -64,65 +64,65 @@
             </div>
         </div>
         <nav class="main-nav">
-    <div class="container">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="produtos.html">All Jewelry</a></li>
-            <li><a href="produtos.html?category=Watches">Watches</a></li>
-            <li><a href="produtos.html?category=Charms">Charms</a></li>
-            <li><a href="produtos.html?category=Bracelets">Bracelets</a></li>
-            <li><a href="sobre.html">About</a></li>
-        </ul>
-    </div>
-</nav>
+            <div class="container">
+                <ul>
+                    <li><a href="index.html" data-i18n="menu.home">Home</a></li>
+                    <li><a href="produtos.html" data-i18n="menu.all_jewelry">All Jewelry</a></li>
+                    <li><a href="produtos.html?category=Watches" data-i18n="menu.watches">Watches</a></li>
+                    <li><a href="produtos.html?category=Charms" data-i18n="menu.charms">Charms</a></li>
+                    <li><a href="produtos.html?category=Bracelets" data-i18n="menu.bracelets">Bracelets</a></li>
+                    <li><a href="sobre.html" data-i18n="menu.about">About</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <!-- LOGIN SECTION -->
     <main class="login-page">
         <div class="container login-container">
             <div class="login-box">
-                <h2>Sign In</h2>
-                <p class="login-subtitle">Welcome back to AUREVIA.</p>
+                <h2 data-i18n="auth.login_title">Sign In</h2>
+                <p class="login-subtitle" data-i18n="auth.welcome">Welcome back to AUREVIA.</p>
 
                 <!-- FORMULÁRIO DE LOGIN -->
                 <form class="login-form" id="login-form" action="#" method="POST">
                     <div class="form-group">
-                        <label for="login-email">Email Address</label>
+                        <label for="login-email" data-i18n="auth.email">Email Address</label>
                         <input type="email" id="login-email" name="email" placeholder="your@email.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="login-password">Password</label>
+                        <label for="login-password" data-i18n="auth.password">Password</label>
                         <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
                     </div>
                     <div class="form-options">
                         <label class="remember-me">
-                            <input type="checkbox"> Remember me
+                            <input type="checkbox"> <span data-i18n="auth.remember_me">Remember me</span>
                         </label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
+                        <a href="#" class="forgot-password" data-i18n="auth.forgot_password">Forgot Password?</a>
                     </div>
-                    <button type="submit" class="btn-auth">SIGN IN</button>
+                    <button type="submit" class="btn-auth" data-i18n="auth.login_button">SIGN IN</button>
                 </form>
 
                 <!-- LINK PARA CRIAR CONTA -->
                 <div class="create-account-link">
-                    <p>Don't have an account? <a href="register.html">Create one now</a></p>
+                    <p><span data-i18n="auth.no_account">Don't have an account?</span> <a href="register.html" data-i18n="auth.create_one">Create one now</a></p>
                 </div>
 
                 <!-- SEPARADOR -->
                 <div class="login-divider">
-                    <span>OR</span>
+                    <span data-i18n="auth.or">OR</span>
                 </div>
 
                 <!-- RECUPERAÇÃO DE SENHA POR CÓDIGO -->
                 <div class="recovery-section">
-                    <h3>Forgot your password?</h3>
-                    <p>Enter your email to receive an access code.</p>
+                    <h3 data-i18n="auth.forgot_password_title">Forgot your password?</h3>
+                    <p data-i18n="auth.recovery_text">Enter your email to receive an access code.</p>
                     <form class="recovery-form" action="#" method="POST">
                         <div class="form-group">
-                            <label for="recovery-email">Email Address</label>
+                            <label for="recovery-email" data-i18n="auth.email">Email Address</label>
                             <input type="email" id="recovery-email" name="recovery_email" placeholder="your@email.com" required>
                         </div>
-                        <button type="submit" class="btn-recovery">SEND ACCESS CODE</button>
+                        <button type="submit" class="btn-recovery" data-i18n="auth.send_code">SEND ACCESS CODE</button>
                     </form>
                 </div>
             </div>
@@ -132,25 +132,25 @@
     <!-- FOOTER -->
     <footer>
         <div class="container footer-content">
-           <div class="footer-logo">
-               <h3>AUREVIA</h3>
-           </div>
-        
-           <p class="footer-distributor">
-               Official Worldwide Distributor of Rommanel
-           </p>
-        
-           <p class="footer-copy">
-               &copy; 2026 AUREVIA. All rights reserved.
-           </p>
-        
-           <div class="redes-sociais">
-               <a href="#">Instagram</a>
-               <a href="#">Facebook</a>
-               <a href="#">WhatsApp</a>
-           </div>
-       </div>
-   </footer>
+            <div class="footer-logo">
+                <h3>AUREVIA</h3>
+            </div>
+
+            <p class="footer-distributor" data-i18n="footer.distributor">
+                Official Worldwide Distributor of Rommanel
+            </p>
+
+            <p class="footer-copy" data-i18n="footer.rights">
+                &copy; 2026 AUREVIA. All rights reserved.
+            </p>
+
+            <div class="redes-sociais">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Biblioteca do Supabase (via CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
