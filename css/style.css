@@ -2747,3 +2747,83 @@ footer {
         transform: translateX(50%) !important;
     }
 }
+
+/* ==========================================
+   SELETOR DE PAÍS - MOBILE (alinhado embaixo do ACCOUNT)
+   ========================================== */
+@media screen and (max-width: 768px) {
+
+    /* Header em coluna */
+    .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 15px 10px !important;
+    }
+
+    /* ACCOUNT (header-left) em primeiro */
+    .header-left {
+        order: 1 !important;
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    /* Logo (header-center) em segundo */
+    .logo {
+        order: 2 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* Ícones + seletor (header-right) em terceiro */
+    .header-right {
+        order: 3 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    /* Seletor de país - alinhado embaixo, centralizado */
+    .country-selector {
+        order: 1 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 0 !important;
+    }
+
+    .country-btn {
+        margin: 0 auto !important;
+    }
+
+    /* Ícones (busca, coração, carrinho) em linha separada */
+    .header-right > a {
+        order: 2 !important;
+    }
+
+    /* Container dos ícones em linha */
+    .header-right {
+        flex-wrap: wrap !important;
+    }
+
+    /* Pseudo-container invisível para organizar */
+    .header-right > a:not(.carrinho-icon),
+    .header-right .carrinho-icon {
+        display: inline-flex !important;
+    }
+
+    /* Agrupar os ícones numa linha */
+    .header-right {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+
+    .country-selector {
+        flex-basis: 100% !important;
+    }
+}
