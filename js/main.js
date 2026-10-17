@@ -966,7 +966,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             card.innerHTML = `
                 <div class="produto-imagem">
                     <img src="${product.image_url}" alt="${displayName}"
-                         onerror="this.src='img/placeholder.jpg'">
+                         onerror="this.src='img/placeholder.jpg'>
                 </div>
                 <h3>${displayName}</h3>
                 <p class="preco"
