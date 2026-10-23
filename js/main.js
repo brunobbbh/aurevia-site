@@ -939,12 +939,28 @@ async function initMercadoPagoCheckout(cart, subtotalBRL, customerData, userEmai
             },
             onSubmit: async ({ formData }) => {
                 console.log("Dados do pagamento MP prontos:", formData);
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        alert("Simulação: Pagamento processado via Mercado Pago!");
-                        resolve();
-                    }, 1500);
-                });
+                
+                try {
+                    // Chama a Edge Function no Supabase para salvar o pedido e enviar o e-mail
+                    const { data, error } = await supabaseClient.functions.invoke('processar-pagamento-mp', {
+                        body: {
+                            formData: formData,
+                            customerData: customerData,
+                            cart: cart,
+                            totalAmount: subtotalBRL,
+                            userEmail: userEmail
+                        }
+                    });
+
+                    if (error) throw error;
+                    
+                    alert("Pagamento processado com sucesso!");
+                    window.location.href = `obrigado.html?order_id=${data.orderId}`;
+
+                } catch (error) {
+                    console.error("Erro ao processar:", error);
+                    alert("Erro ao processar pagamento. Tente novamente.");
+                }
             },
         },
     };
