@@ -803,15 +803,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const lang = getCurrentLanguage();
         const isPT = lang === 'pt';
 
-        // --- VERIFICAÇÃO DE PAÍS MELHORADA ---
+        // --- VERIFICAÇÃO DE PAÍS (Respeita o seletor do topo) ---
         let userCountry = localStorage.getItem('aurevia_country') || 'US';
-        const enderecoPais = customerData && customerData.country ? String(customerData.country).toUpperCase() : '';
-
-        // Se o país no banco for BR, BRAZIL ou BRASIL, força o modo Brasil
-        if (enderecoPais.includes('BR') || enderecoPais.includes('BRAZIL') || enderecoPais.includes('BRASIL')) {
-            userCountry = 'BR';
-            localStorage.setItem('aurevia_country', 'BR'); // Salva para o site todo
-        }
 
         checkoutItemsList.innerHTML = '';
         let subtotalUSD = 0;
