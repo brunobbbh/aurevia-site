@@ -912,9 +912,22 @@ async function initMercadoPagoCheckout(cart, subtotalBRL, customerData, userEmai
     const mp = new MercadoPago('APP_USR-7e7a5373-54a1-4d34-b741-d9a1fc13c26b', { locale: 'pt-BR' });
     const bricksBuilder = mp.bricks();
 
+    // ==========================================
+// 10.1. FUNÇÃO DO MERCADO PAGO (Checkout Bricks)
+// ==========================================
+async function initMercadoPagoCheckout(cart, subtotalBRL, customerData, userEmail) {
+    const container = document.getElementById('mercado-pago-container');
+    if (!container) return;
+    
+    container.innerHTML = ''; // Limpa o container
+
+    // ⚠️ SUA CHAVE PÚBLICA DO MERCADO PAGO
+    const mp = new MercadoPago('APP_USR-7e7a5373-54a1-4d34-b741-d9a1fc13c26b', { locale: 'pt-BR' });
+    const bricksBuilder = mp.bricks();
+
     const settings = {
         initialization: {
-            amount: subtotalBRL, // Agora passamos o valor em Reais!
+            amount: subtotalBRL, // Valor em Reais
         },
         customization: {
             paymentMethods: {
@@ -934,6 +947,10 @@ async function initMercadoPagoCheckout(cart, subtotalBRL, customerData, userEmai
                 console.log("Mercado Pago carregado na tela!");
                 container.style.display = 'block';
             },
+            onError: (error) => {
+                // ⭐ ADICIONAMOS ESTA LINHA AQUI
+                console.error("Erro no Mercado Pago Brick:", error);
+            },
             onSubmit: async ({ formData }) => {
                 console.log("Dados do pagamento MP prontos:", formData);
                 return new Promise((resolve) => {
@@ -946,6 +963,12 @@ async function initMercadoPagoCheckout(cart, subtotalBRL, customerData, userEmai
         },
     };
 
+    window.paymentBrickController = await bricksBuilder.create(
+        "payment",
+        "mercado-pago-container",
+        settings
+    );
+}
     window.paymentBrickController = await bricksBuilder.create(
         "payment",
         "mercado-pago-container",
