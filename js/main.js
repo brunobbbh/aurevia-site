@@ -276,14 +276,25 @@ document.addEventListener('DOMContentLoaded', async function() {
                         </button>
                     </div>
 
-                    <div id="paypal-button-container" style="margin-top: 20px;"></div>
+                    <div id="paypal-button-container" style="margin-top: 20px; display: none;"></div>
+                    <div id="mercado-pago-product-container" style="margin-top: 20px; display: none;"></div>
                 </div>
             `;
 
             if (typeof updateAllPrices === 'function') updateAllPrices();
             if (typeof applyTranslations === 'function') applyTranslations();
 
-            initPayPalButton(product);
+            // --- Lógica de pagamento na página do produto ---
+            const userCountry = localStorage.getItem('aurevia_country') || 'US';
+            if (userCountry === 'BR') {
+                const mpBtn = document.getElementById('mercado-pago-product-container');
+                if(mpBtn) {
+                    mpBtn.style.display = 'block';
+                    mpBtn.innerHTML = '<p style="text-align:center; font-size:0.9rem; color:#666; margin-top:10px;"><i class="fas fa-info-circle"></i> Adicione ao carrinho para pagar com Pix ou Cartão.</p>';
+                }
+            } else {
+                initPayPalButton(product);
+            }
 
             if (relatedGrid) {
                 const { data: related } = await supabaseClient
@@ -362,6 +373,7 @@ async function initPayPalButton(product) {
     const priceInUSD = parseFloat(product.sale_price).toFixed(2);
 
     container.innerHTML = '';
+    container.style.display = 'block';
 
     paypal.Buttons({
         createOrder: function(data, actions) {
@@ -761,7 +773,7 @@ window.handleAddToCart = async function(productId) {
 };
 
 // ==========================================
-// 10. PÁGINA DE CHECKOUT (sempre em USD)
+// 10. PÁGINA DE CHECKOUT (Condicional: MP vs PayPal)
 // ==========================================
 document.addEventListener('DOMContentLoaded', async function() {
     const checkoutItemsList = document.getElementById('checkout-items-list');
@@ -791,13 +803,31 @@ document.addEventListener('DOMContentLoaded', async function() {
         const lang = getCurrentLanguage();
         const isPT = lang === 'pt';
 
+        // --- VERIFICAÇÃO DE PAÍS MELHORADA ---
+        let userCountry = localStorage.getItem('aurevia_country') || 'US';
+        const enderecoPais = customerData && customerData.country ? String(customerData.country).toUpperCase() : '';
+
+        // Se o país no banco for BR, BRAZIL ou BRASIL, força o modo Brasil
+        if (enderecoPais.includes('BR') || enderecoPais.includes('BRAZIL') || enderecoPais.includes('BRASIL')) {
+            userCountry = 'BR';
+            localStorage.setItem('aurevia_country', 'BR'); // Salva para o site todo
+        }
+
         checkoutItemsList.innerHTML = '';
-        let subtotal = 0;
+        let subtotalUSD = 0;
+        let subtotalBRL = 0;
 
         cart.forEach(item => {
-            const itemTotal = parseFloat(item.price_usd) * item.quantity;
-            subtotal += itemTotal;
+            const itemTotalUSD = parseFloat(item.price_usd) * item.quantity;
+            const itemTotalBRL = parseFloat(item.price_brl) * item.quantity;
+            
+            subtotalUSD += itemTotalUSD;
+            subtotalBRL += itemTotalBRL;
+
             const itemName = (isPT && item.name_pt) ? item.name_pt : item.name;
+            const priceDisplay = userCountry === 'BR' 
+                ? `R$ ${itemTotalBRL.toFixed(2).replace('.', ',')}` 
+                : `$ ${itemTotalUSD.toFixed(2)}`;
 
             const itemElement = document.createElement('div');
             itemElement.className = 'checkout-item';
@@ -810,23 +840,27 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <p>Quantity: ${item.quantity}</p>
                     <p>SKU: ${item.sku || 'N/A'}</p>
                 </div>
-                <div class="checkout-item-price">$ ${itemTotal.toFixed(2)}</div>
+                <div class="checkout-item-price">${priceDisplay}</div>
             `;
             checkoutItemsList.appendChild(itemElement);
         });
 
+        const totalDisplay = userCountry === 'BR' 
+            ? `R$ ${subtotalBRL.toFixed(2).replace('.', ',')}` 
+            : `$ ${subtotalUSD.toFixed(2)}`;
+
         checkoutTotals.innerHTML = `
             <div class="checkout-summary-row">
                 <span>Subtotal</span>
-                <span>$ ${subtotal.toFixed(2)}</span>
+                <span>${totalDisplay}</span>
             </div>
             <div class="checkout-summary-row">
                 <span>Shipping</span>
                 <span>Free</span>
             </div>
             <div class="checkout-summary-row total">
-                <span>Total (USD)</span>
-                <span>$ ${subtotal.toFixed(2)}</span>
+                <span>Total (${userCountry === 'BR' ? 'BRL' : 'USD'})</span>
+                <span>${totalDisplay}</span>
             </div>
         `;
 
@@ -843,19 +877,91 @@ document.addEventListener('DOMContentLoaded', async function() {
             `;
         }
 
-        initPayPalCheckout(cart, subtotal, customerData, session.user.email);
+        // --- LÓGICA CONDICIONAL DE PAGAMENTO ---
+        const mpContainer = document.getElementById('mercado-pago-container');
+        const paypalContainer = document.getElementById('paypal-checkout-container');
+        
+        console.log("País detectado para pagamento:", userCountry);
+
+        if (userCountry === 'BR') {
+            if(mpContainer) {
+                mpContainer.style.display = 'block';
+                initMercadoPagoCheckout(cart, subtotalBRL, customerData, session.user.email);
+            }
+            if(paypalContainer) paypalContainer.style.display = 'none';
+        } else {
+            if(mpContainer) mpContainer.style.display = 'none';
+            if(paypalContainer) {
+                paypalContainer.style.display = 'block';
+                initPayPalCheckout(cart, subtotalUSD, customerData, session.user.email);
+            }
+        }
     }
 });
 
 // ==========================================
+// 10.1. FUNÇÃO DO MERCADO PAGO (Checkout Bricks)
+// ==========================================
+async function initMercadoPagoCheckout(cart, subtotalBRL, customerData, userEmail) {
+    const container = document.getElementById('mercado-pago-container');
+    if (!container) return;
+    
+    container.innerHTML = ''; // Limpa o container
+
+    // ⚠️ SUA CHAVE PÚBLICA DO MERCADO PAGO (Produção)
+    const mp = new MercadoPago('APP_USR-7e7a5373-54a1-4d34-b741-d9a1fc13c26b', { locale: 'pt-BR' });
+    const bricksBuilder = mp.bricks();
+
+    const settings = {
+        initialization: {
+            amount: subtotalBRL, // Agora passamos o valor em Reais!
+        },
+        customization: {
+            paymentMethods: {
+                creditCard: "all",
+                debitCard: "all",
+                ticket: "all", 
+                bankTransfer: "all", 
+            },
+            visual: {
+                style: {
+                    theme: "default",
+                }
+            }
+        },
+        callbacks: {
+            onReady: () => {
+                console.log("Mercado Pago carregado na tela!");
+                container.style.display = 'block';
+            },
+            onSubmit: async ({ formData }) => {
+                console.log("Dados do pagamento MP prontos:", formData);
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        alert("Simulação: Pagamento processado via Mercado Pago!");
+                        resolve();
+                    }, 1500);
+                });
+            },
+        },
+    };
+
+    window.paymentBrickController = await bricksBuilder.create(
+        "payment",
+        "mercado-pago-container",
+        settings
+    );
+}
+
+// ==========================================
 // 11. PAYPAL CHECKOUT (múltiplos itens)
 // ==========================================
-function initPayPalCheckout(cart, subtotal, customerData, userEmail) {
+function initPayPalCheckout(cart, subtotalUSD, customerData, userEmail) {
     const container = document.getElementById('paypal-checkout-container');
     if (!container || typeof paypal === 'undefined') return;
 
     container.innerHTML = '';
-    const totalInUSD = parseFloat(subtotal).toFixed(2);
+    const totalInUSD = parseFloat(subtotalUSD).toFixed(2);
 
     paypal.Buttons({
         createOrder: function(data, actions) {
@@ -966,7 +1072,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             card.innerHTML = `
                 <div class="produto-imagem">
                     <img src="${product.image_url}" alt="${displayName}"
-                         onerror="this.src='img/placeholder.jpg'>
+                         onerror="this.src='img/placeholder.jpg'">
                 </div>
                 <h3>${displayName}</h3>
                 <p class="preco"
@@ -1063,7 +1169,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const country = item.dataset.country;
             localStorage.setItem('aurevia_country', country);
             
-            // ⭐ RECARREGA a página para aplicar tudo (tradução, preços, nomes)
+            // ⭐ RECARREGA a página para aplicar tudo (tradução, preços, nomes, botões de pagamento)
             window.location.reload();
         });
     });
